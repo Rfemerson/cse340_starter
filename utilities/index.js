@@ -57,4 +57,38 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+/* ***************************
+* Build details view
+* ***************************/
+Util.buildInventoryDetails = async function(data){
+  let invDesc = ""
+  if(data.length > 0){
+      invDesc += '<div class="detailpage">'
+      data.forEach(vehicle => {
+        invDesc += '<div class="detail-content">'
+        invDesc += '<img id="detailimg" src="' + vehicle.inv_image + '" alt="Image of '+ vehicle.inv_year + ' ' + vehicle.inv_make + ' ' + vehicle.inv_model + ' on CSE Motors" />'
+        invDesc += '<section id="invDetails">'
+        invDesc += '<h3 class="detailPrice"><span class="label">Price: </span>$' + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</h3>'
+        invDesc += vehicle.inv_description
+        invDesc += '<h3 class="detailInfo"><span class="label">Color:</span> ' + vehicle.inv_color + '</h3>'
+        invDesc += '<h3 class="detailInfo"><span class="label">Miles:</span> ' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</h3>'
+        invDesc += '</section>'
+        invDesc += '</div>'
+          
+      })
+      invDesc += '</div>'
+      
+  } else {
+      invDesc += '<p class="notice">Sorry, no matching description could be found.</p>'
+  }
+  return invDesc
+}
+
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ **************************************** */
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
 module.exports = Util
