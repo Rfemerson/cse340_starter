@@ -2,7 +2,7 @@ const express = require("express");
 const router = new express.Router();
 const utilities = require("../utilities/");
 const accountController = require("../controllers/accountController"); 
-const regValidade = require("../utilities/account-validation")
+const regValidate = require("../utilities/account-validation")
 
 // Route to build account login by account view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
@@ -10,9 +10,10 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin));
 // Route to build account registration view
 router.get("/register", utilities.handleErrors(accountController.buildRegister));
 // Route to process account registration
-router.post('/register', 
-    regValidade.registrationRules(), 
-    regValidade.checkRegData, 
+router.post(
+    '/register', 
+    regValidate.registrationRules(), 
+    regValidate.checkRegData, 
     utilities.handleErrors(accountController.registerAccount)
 )
 

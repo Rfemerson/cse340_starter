@@ -64,6 +64,43 @@ invCont.buildManagementPage = async function (req, res, next) {
 }
 
 /* ******************************
+* Add classification view
+* ******************************/
+invCont.buildAddClassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-classification", {
+    title: "Add Classification",
+    nav,
+    errors: null
+  })
+}
+
+/* ******************************
+* Add classification processing
+* ******************************/
+invCont.addClassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const { classification_name } = req.body
+  const regResult = await invModel.addClassification(
+    classification_name
+  ) 
+  if (regResult) {
+    nav = await utilities.getNav()
+    req.flash(
+      "notice",
+      `The ${classification_name} classification was added.`
+    )
+    res.status(201).redirect("/inv/management")
+  } else {
+    req.flash(
+      "notice",
+      "Error adding classification, please try again."
+    )
+    res.status(501).redirect("/inv/add-classification")
+  }
+}
+
+/* ******************************
 * Intentionally trigger a 500 error
 * ******************************/
 invCont.triggerError = function (req, res, next) {
@@ -71,7 +108,5 @@ invCont.triggerError = function (req, res, next) {
   error.status = 500
   next(error)
 }
-
-
 
 module.exports = invCont

@@ -39,4 +39,34 @@ async function getDetailsByInventoryId(inv_id) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getDetailsByInventoryId}
+/* ***************************
+* Add a new classification
+* ************************** */
+async function addClassification(classification_name){
+  try {
+    const result = await pool.query(
+      "INSERT INTO public.classification (classification_name) VALUES ($1) RETURNING classification_id",
+      [classification_name]
+    )
+    return result.rows[0].classification_id
+  } catch (error) {
+    console.error("addClassification error " + error)
+  }
+}
+
+/* ***************************
+* Get classification by name
+* ************************** */
+async function getClassificationByName(classification_name){
+  try {
+    const data = await pool.query(
+      "SELECT * FROM public.classification WHERE classification_name = $1",
+      [classification_name]
+    )
+    return data.rows[0]
+  } catch (error) {
+    console.error("getClassificationByName error " + error)
+  }
+}
+
+module.exports = {getClassifications, getInventoryByClassificationId, getDetailsByInventoryId, addClassification, getClassificationByName}
