@@ -50,13 +50,28 @@ invCont.buildByInventoryId = async function (req, res, next) {
 }
 
 /* ******************************
+* Management view
+* ******************************/
+invCont.buildManagementPage = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let classificationSelect = await utilities.buildClassificationList()
+  res.render("./inventory/management", {
+    title: "Vehicle Management",
+    nav,
+    classificationSelect,
+    errors: null
+  })
+}
+
+/* ******************************
 * Intentionally trigger a 500 error
 * ******************************/
 invCont.triggerError = function (req, res, next) {
-  // Cria um erro 500
   const error = new Error("Intentional Server Crash!")
   error.status = 500
   next(error)
 }
+
+
 
 module.exports = invCont

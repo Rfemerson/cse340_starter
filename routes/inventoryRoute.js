@@ -9,8 +9,7 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 // vehicle details route
 router.get("/detail/:inventoryId", invController.buildByInventoryId);
 
-router.get("/trigger-error", (req, res, next) => {
-  require("../controllers/invController").triggerError(req, res, next)
-})
+// Route to build management view
+router.get("/management", invController.buildManagementPage);
 
 module.exports = router;

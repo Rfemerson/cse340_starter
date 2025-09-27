@@ -84,6 +84,20 @@ Util.buildInventoryDetails = async function(data){
   return invDesc
 }
 
+/* ***************************
+* Build the classification select list
+* ***************************/
+Util.buildClassificationList = async function(){
+  let data = await invModel.getClassifications()
+  let list = '<select name="classification_id" id="classification_id">'
+  list += '<option value="" disabled selected>Choose a Classification</option>'
+  data.rows.forEach(row => {
+    list += '<option value="' + row.classification_id + '">' + row.classification_name + '</option>'
+  })
+  list += '</select>'
+  return list
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
