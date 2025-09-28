@@ -40,9 +40,6 @@ app.set("layout","./layouts/layout")
   saveUninitialized: true,
   name: 'sessionId',
 }))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-
 
 
 // Express Messages Middleware
@@ -51,6 +48,9 @@ app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
 
 /* ***********************
  * Routes
