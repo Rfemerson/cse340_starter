@@ -5,12 +5,20 @@
 <% } else { res.redirect('/') } %>
 
 <!--Message Block-->
-<% messages() %>
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
 
 <!-- Inventory management view -->
 <section id="managementPage">
     <h2>Click the button to add a new classification of vehicles</h2>
     <a href="/inv/add-classification" id="newClassBtn">Add New Classification</a>
     <h2>Click the button to add a new vehicle to the inventory</h2>
-    <a href="/inv/addInventory" id="newCarBtn">Add New Vehicle</a>
+    <a href="/inv/add-inventory" id="newCarBtn">Add New Vehicle</a>
 </section>

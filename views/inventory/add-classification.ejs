@@ -4,7 +4,7 @@
     </h1>
 <% } else { res.redirect('/') } %>
 
-<% messages() %>
+<%- messages() %>
 
 <% if (errors) { %>
   <ul class="notice">
@@ -20,7 +20,7 @@
         <label for="classification_name">Classification: </label>
         <p>The new classification name cannot contain a space or special character of any kind.</p>
         <input type="text" placeholder="Classification Name" name="classification_name" required
-            value="<%= locals.classification_name %>" pattern="[A-Za-z]" title="Letters only">
+            value="<%= locals.classification_name %>" pattern="^[A-Za-z]+$" title="Letters only">
 
         <button type="submit">Add Classification</button>
     </fieldset>

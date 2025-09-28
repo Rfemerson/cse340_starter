@@ -1,3 +1,4 @@
+const e = require("connect-flash")
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities")
 
@@ -54,11 +55,9 @@ invCont.buildByInventoryId = async function (req, res, next) {
 * ******************************/
 invCont.buildManagementPage = async function (req, res, next) {
   let nav = await utilities.getNav()
-  let classificationSelect = await utilities.buildClassificationList()
   res.render("./inventory/management", {
     title: "Vehicle Management",
     nav,
-    classificationSelect,
     errors: null
   })
 }
@@ -90,13 +89,61 @@ invCont.addClassification = async function (req, res, next) {
       "notice",
       `The ${classification_name} classification was added.`
     )
-    res.status(201).redirect("/inv/management")
+    res.status(201).redirect("management")
   } else {
     req.flash(
       "notice",
       "Error adding classification, please try again."
     )
-    res.status(501).redirect("/inv/add-classification")
+    res.status(501).redirect("add-classification")
+  }
+}
+
+/* ******************************
+* Add inventory view
+* ******************************/
+invCont.buildAddInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let selectList = await utilities.selectList()
+  res.render("./inventory/add-inventory", {
+    title: "Add Inventory",
+    nav,
+    errors: null,
+    selectList
+  })
+}
+
+/* ******************************
+* Add inventory processing
+* ******************************/
+invCont.addInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let selectList = await utilities.selectList()
+  const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body
+  const regResult = await invModel.addInventory(
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id
+  )
+  if (regResult) {
+    req.flash(
+        "notice",
+        `The ${inv_make} ${inv_model} was successfully added.`
+    )
+    res.status(201).redirect("management")
+  } else {
+    req.flash(
+        "notice",
+        "Sorry, the registration failed."
+    )
+    res.status(501).redirect("add-inventory")
   }
 }
 

@@ -526,6 +526,74 @@ footer {
   background-color: #117a8b;
 }
 
+/* Add Car Page */
+form#addCar {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #1d3557;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+form#addCar label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #eceff1;
+  margin-top: 12px;
+}
+
+form#addCar input[type="text"],
+form#addCar input[type="number"],
+form#addCar select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+form#addCar input[type="text"]:focus,
+form#addCar input[type="number"]:focus,
+form#addCar select:focus {
+  border-color: #007bff;
+  outline: none;
+  background-color: #eaf4ff;
+}
+
+form#addCar button[type="submit"] {
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form#addCar button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+form#addCar label[for="inv_image"],
+form#addCar label[for="inv_thumbnail"] {
+  margin-bottom: 4px;
+}
+
+form#addCar select {
+  appearance: none;
+  background: white url('data:image/svg+xml;utf8,<svg fill="gray" height="10" viewBox="0 0 24 24" width="10" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
+  background-size: 10px;
+}
+
 @media only screen and (min-width: 1000px) {
   .mainsection {
     display: grid;

@@ -87,16 +87,23 @@ Util.buildInventoryDetails = async function(data){
 /* ***************************
 * Build the classification select list
 * ***************************/
-Util.buildClassificationList = async function(){
-  let data = await invModel.getClassifications()
-  let list = '<select name="classification_id" id="classification_id">'
-  list += '<option value="" disabled selected>Choose a Classification</option>'
-  data.rows.forEach(row => {
-    list += '<option value="' + row.classification_id + '">' + row.classification_name + '</option>'
-  })
-  list += '</select>'
-  return list
+Util.selectList = async function (classification_id) {
+    let data = await invModel.getClassifications()
+    let list = '<select class="lbl-properties classification_id" id="classificationList" name="classification_id" required>'
+    list += '<option value="" selected>Choose a classification</option>'
+    data.rows.forEach((row) => {
+        list += `<option value="${row.classification_id}"`
+        if (classification_id) {
+            if(row.classification_id == classification_id) {
+                list += ' selected '
+            }
+        }
+        list += `>${row.classification_name}</option>`
+    })
+    list += '</select>'
+    return list
 }
+
 
 /* ****************************************
  * Middleware For Handling Errors
