@@ -55,9 +55,11 @@ invCont.buildByInventoryId = async function (req, res, next) {
 * ******************************/
 invCont.buildManagementPage = async function (req, res, next) {
   let nav = await utilities.getNav()
+  const selectList = await utilities.selectList()
   res.render("./inventory/management", {
     title: "Vehicle Management",
     nav,
+    selectList,
     errors: null
   })
 }
@@ -154,6 +156,19 @@ invCont.triggerError = function (req, res, next) {
   const error = new Error("Intentional Server Crash!")
   error.status = 500
   next(error)
+}
+
+/* ***************************
+*  Return Inventory by Classification As JSON
+* ************************** */
+invCont.getInventoryJSON = async (req, res, next) => {
+  const classification_id = parseInt(req.params.classificationId)
+  const invData = await invModel.getInventoryByClassificationId(classification_id)
+  if (invData[0].inv_id) {
+    return res.json(invData)
+  } else {
+    next(new Error("No data returned"))
+  }
 }
 
 module.exports = invCont
