@@ -481,7 +481,6 @@ footer {
   margin: 2rem auto;
   padding: 2rem;
   background-color: #1d3557;
-  /* Mesmo fundo do padrão */
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
@@ -611,7 +610,7 @@ footer {
 }
 
 /* Add Car Page */
-form#addCar {
+form.addCar {
   max-width: 400px;
   margin: 20px auto;
   padding: 20px;
@@ -622,7 +621,7 @@ form#addCar {
   color: white;
 }
 
-form#addCar label {
+form.addCar label {
   display: block;
   font-weight: 600;
   margin-bottom: 6px;
@@ -630,9 +629,9 @@ form#addCar label {
   margin-top: 12px;
 }
 
-form#addCar input[type="text"],
-form#addCar input[type="number"],
-form#addCar select {
+form.addCar input[type="text"],
+form.addCar input[type="number"],
+form.addCar select {
   width: 100%;
   padding: 8px 10px;
   border: 1px solid #ccc;
@@ -642,15 +641,15 @@ form#addCar select {
   transition: border-color 0.3s ease;
 }
 
-form#addCar input[type="text"]:focus,
-form#addCar input[type="number"]:focus,
-form#addCar select:focus {
+form.addCar input[type="text"]:focus,
+form.addCar input[type="number"]:focus,
+form.addCar select:focus {
   border-color: #007bff;
   outline: none;
   background-color: #eaf4ff;
 }
 
-form#addCar button[type="submit"] {
+form.addCar button[type="submit"] {
   margin-top: 20px;
   padding: 12px;
   background-color: #007bff;
@@ -663,16 +662,16 @@ form#addCar button[type="submit"] {
   transition: background-color 0.3s ease;
 }
 
-form#addCar button[type="submit"]:hover {
+form.addCar button[type="submit"]:hover {
   background-color: #0056b3;
 }
 
-form#addCar label[for="inv_image"],
-form#addCar label[for="inv_thumbnail"] {
+form.addCar label[for="inv_image"],
+form.addCar label[for="inv_thumbnail"] {
   margin-bottom: 4px;
 }
 
-form#addCar select {
+form.addCar select {
   appearance: none;
   background: white url('data:image/svg+xml;utf8,<svg fill="gray" height="10" viewBox="0 0 24 24" width="10" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
   background-size: 10px;

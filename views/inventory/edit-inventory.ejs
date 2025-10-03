@@ -15,7 +15,7 @@
 <% } %>
 
 <!-- Add Inventory Form -->
-<form action="/inv/update" id="addCar" method="Post">
+<form action="/inv/update" class="addCar" id="updateForm" method="Post">
     <p class="required">All Fields are Required</p>
 
     <label class="lbl-properties">Classification:
@@ -56,5 +56,11 @@
     <input type="text" placeholder="Color" name="inv_color" required value="<%= locals.inv_color %>"
         pattern="[A-Za-z].{1,}">
 
-    <button type="submit">Update Vehicle</button>
+    <button type="submit" disabled>Update Vehicle</button>
+
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %>>
 </form>
+
+<script src="../../js/inv-update.js"></script>
