@@ -443,7 +443,7 @@ footer {
 }
 
 /* Management Page */
-#managementPage {
+.managementPage {
   max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
@@ -451,15 +451,16 @@ footer {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
   text-align: center;
+  color: white;
 }
 
-#managementPage h2 {
+.managementPage h2 {
   font-size: 1.3rem;
   color: #eceff1;
   margin: 1rem 0 0.5rem;
 }
 
-#managementPage a {
+.managementPage a {
   display: inline-block;
   padding: 0.75rem 1.5rem;
   margin-bottom: 1.5rem;
@@ -471,7 +472,7 @@ footer {
   transition: background-color 0.2s ease;
 }
 
-#managementPage a:hover {
+.managementPage a:hover {
   background-color: #0056b3;
 }
 
