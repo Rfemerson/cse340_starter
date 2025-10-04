@@ -139,7 +139,25 @@ Util.checkJWTToken = (req, res, next) => {
     req.flash("notice", "Please log in.")
     return res.redirect("/account/login")
   }
- }
+}
+
+/* *********************************
+* Check account type
+* *******************************/
+Util.checkAuthorization = (req, res, next) => {
+  if (res.locals.loggedin) {
+    const accountType = res.locals.accountData.account_type
+    if (accountType === "Admin" || accountType === "Employee") {
+      next()
+    } else {
+      req.flash("notice", "You do not have permission to access this page.")
+      res.redirect("/account/login")
+    }
+  } else {
+    req.flash("notice", "You must be logged in to access this page.")
+    res.redirect("/account/login")
+  }
+}
 
 /* ****************************************
  * Middleware For Handling Errors
