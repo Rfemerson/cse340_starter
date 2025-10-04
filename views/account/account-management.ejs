@@ -1,0 +1,30 @@
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+<% } else { res.redirect('/') } %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error=> { %>
+            <li>
+                <%= error.msg %>
+            </li>
+        <% }) %>
+    </ul>
+<% } %>
+
+<!-- Account management -->
+<section class="managementPage">
+    <h2>You're logged in</h2>
+
+    <p><a href="/account/update/<%= locals.accountData.account_id %>">Update Account Information</a></p>
+
+    <% if (locals.accountData.account_type === 'Employee' || locals.accountData.account_type === 'Admin') { %>
+        <h2>Inventory Management</h2>
+        <p>Use the link below to manage the inventory.</p>
+        <p><a href="/inv/">Go to Inventory Management</a></p>
+    <% } %>
+</select>

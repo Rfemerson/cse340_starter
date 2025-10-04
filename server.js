@@ -12,12 +12,13 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
-const utilities = require("./utilities/") 
+const utilities = require("./utilities") 
 const session = require("express-session")
 const pool = require("./database/")
 const accountRoute = require("./routes/accountRoute") 
 const accountController = require("./controllers/accountController")
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 
 
 /* ***********************
@@ -41,7 +42,6 @@ app.set("layout","./layouts/layout")
   name: 'sessionId',
 }))
 
-
 // Express Messages Middleware
 app.use(require('connect-flash')())
 app.use(function(req, res, next){
@@ -49,8 +49,9 @@ app.use(function(req, res, next){
   next()
 })
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * Routes
