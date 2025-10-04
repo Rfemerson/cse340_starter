@@ -280,8 +280,8 @@ invCont.deleteInventoryView = async function (req, res, next) {
 }
 
 /* ***************************
- *  Delete Inventory Data
- * ************************** */
+*  Delete Inventory Data
+* ************************** */
 invCont.deleteItem = async function (req, res, next) {
   let nav = await utilities.getNav()
   const inv_id = parseInt(req.body.inv_id)

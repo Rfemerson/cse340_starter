@@ -9,12 +9,13 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin));
 
 // Route to build account registration view
 router.get("/register", utilities.handleErrors(accountController.buildRegister));
+
 // Route to process account registration
 router.post(
-    '/register', 
-    regValidate.registrationRules(), 
-    regValidate.checkRegData, 
-    utilities.handleErrors(accountController.registerAccount)
+  '/register', 
+  regValidate.registrationRules(), 
+  regValidate.checkRegData, 
+  utilities.handleErrors(accountController.registerAccount)
 )
 
 // Process the login attempt
@@ -29,7 +30,10 @@ router.post(
 router.get(
   "/",
   utilities.checkJWTToken, 
-  utilities.checkLogin, 
-  utilities.handleErrors(accountController.buildAccountManagement));
+  utilities.handleErrors(accountController.buildAccountManagement)
+)
+
+// Route to process logout
+router.get("/logout", utilities.handleErrors(accountController.logout))
 
 module.exports = router;
