@@ -106,6 +106,26 @@ Util.selectList = async function (classification_id) {
     return list
 }
 
+/* **************************************
+* Build the reviews view HTML
+* ************************************ */
+Util.buildReviews = async function(reviews) {
+  let html = '<ul class="review-list">'
+  if (reviews.length > 0) {
+    reviews.forEach(review => {
+      const reviewDate = new Date(review.review_date).toLocaleString()
+      html += '<li>'
+      html += `<p class="review-text">"${review.review_text}"</p>`
+      html += `<p class="review-author">By: ${review.account_firstname} on ${reviewDate}</p>`
+      html += '</li>'
+    })
+  } else {
+    html += '<li>Be the first to write a review!</li>'
+  }
+  html += '</ul>'
+  return html
+}
+
 /* ****************************************
 * Middleware to check token validity
 **************************************** */

@@ -19,7 +19,7 @@ const accountRoute = require("./routes/accountRoute")
 const accountController = require("./controllers/accountController")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
-
+const reviewRoute = require("./routes/reviewRoute")
 
 /* ***********************
  * engine and middlewares
@@ -63,6 +63,8 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 app.use("/inv", utilities.handleErrors(inventoryRoute))
 // Account routes
 app.use("/account", utilities.handleErrors(accountRoute))
+// Review routes
+app.use("/reviews", utilities.handleErrors(reviewRoute))
 
 
 // File Not Found Route - must be last route in list

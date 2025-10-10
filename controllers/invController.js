@@ -25,11 +25,11 @@ invCont.buildByClassificationId = async function (req, res, next) {
 * Deliver inventory by details view
 * ******************************/
 invCont.buildByInventoryId = async function (req, res, next) {
-  // console.log(this.buildByInventoryId)
   const inv_id = req.params.inventoryId;
   const data = await invModel.getDetailsByInventoryId(inv_id);
-  // console.log("VEHICLE DATA =>", data)
+  const reviews = await reviewModel.getReviewsByInventoryId(inv_id);
   const invDesc = await utilities.buildInventoryDetails(data);
+  const reviewsHTML = await utilities.buildReviews(reviews);
   if (data.length > 0) {
     const grid = await utilities.buildClassificationGrid(data);
     let nav = await utilities.getNav();
@@ -41,7 +41,9 @@ invCont.buildByInventoryId = async function (req, res, next) {
       invDesc,
       grid,
       nav,
-      message:""
+      reviewsHTML,
+      errors: null,
+      inv_id
     });
   } else {
     const error = new Error("Sorry, car not found")
